@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prom-service
+  namespace: monitoring
+  labels:
+    app: prom-service
+spec:
+  selector:
+    app: prom-service
+  type: NodePort
+  ports:
+    - name: metrics
+      port: 9100
+      targetPort: 9100
+      nodePort: 30021
+

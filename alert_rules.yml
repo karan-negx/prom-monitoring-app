@@ -20,7 +20,7 @@ groups:
           description: "Memory usage is above 90% for more than 2 minutes."
 
       - alert: NodeDown
-        expr: up{job="node_exporter"} == 0
+        expr: up{job="python-app"} == 0
         for: 1m
         labels:
           severity: critical

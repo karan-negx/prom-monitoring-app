@@ -6,6 +6,7 @@ services:
     container_name: python-prom-app
     ports:
       - "8000:8000"
+    
 
   prometheus:
     image: prom/prometheus
