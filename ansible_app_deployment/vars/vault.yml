@@ -1,0 +1,9 @@
+# vars/vault.yml
+db_user: "myappuser"
+db_password: "supersecretpassword123"
+
+#ansible-vault encrypt vars/vault.yml
+# You will be prompted to set and confirm a vault password.
+
+# ansible-playbook -i inventory.ini playbook.yml --ask-vault-pass
+# Ansible will ask for your vault password to decrypt 'vars/vault.yml'

@@ -1,0 +1,26 @@
+version: '3.5'
+
+services:
+  app:
+    build: .
+    container_name: python-prom-app
+    ports:
+    - "8000:8000"
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    - ./alert_rules.yml:/etc/prometheus/alert_rules.yml
+
+    ports:
+    - "9090:9090"
+
+  elk:
+    image: elasticsearch:latest
+    container_name: hopeful_cohen
+    volumes:
+    - es_data:/usr/share/elasticsearch/data
+    ports:
+    - "9200:9200"

@@ -1,0 +1,36 @@
+---
+- name: Deploy Multi-Tier Web Application
+  hosts: localhost               # Target 'localhost' explicitly
+  connection: local   
+  become: yes  # sudo access for tasks that require elevated privileges                  
+  vars_files:
+    - vars/vault.yml             
+                                 
+
+  roles:
+    # - common                     
+    - webserver                                    
+    # - database                   
+
+  # pre_tasks:                     
+  #   - name: Ensure necessary packages for common tasks
+  #     ansible.builtin.apt:
+  #       name:
+  #         - curl
+  #         - git
+  #       state: present
+  #     when: ansible_os_family == "Debian" 
+  #     tags:
+  #       - common_prereqs
+
+  # post_tasks:                    
+  #   - name: Validate webserver is running
+  #     ansible.builtin.uri:
+  #       url: "http://{{ hostvars[groups['webservers'][0]]['ansible_host'] }}" 
+  #       #http://localhost
+  #       status_code: 200
+  #     delegate_to: localhost    
+  #     run_once: true    
+  #     when: "'webservers' in groups" 
+  #     tags:
+  #       - validation

@@ -1,0 +1,24 @@
+- name: Install Nginx
+  community.general.homebrew:
+    name: nginx
+    state: present
+  when: ansible_os_family == "Debian" 
+
+- name: Install Nginx
+  community.general.homebrew:
+    name: nginx
+    state: present
+  when: ansible_os_family == "Debian" 
+
+- name: Copy Nginx configuration
+  ansible.builtin.template:
+    src: nginx.conf.j2             
+    dest: /Users/hypnos/Documents/prom-monitoring/ansible_app_deployment/nginx.conf    
+    mode: '0644'                   
+  notify: Restart Nginx            
+
+- name: Start Nginx service
+  ansible.builtin.systemd:
+    name: nginx
+    state: started                 
+    enabled: yes                   

@@ -8,7 +8,7 @@ REQUEST_COUNT = Counter("http_requests_total", "Total HTTP Requests")
 @app.route("/")
 def hello():
     REQUEST_COUNT.inc()
-    print("Request count incremented")    
+    print("Request count incremented")
     return "Hello from Python!"
 
 

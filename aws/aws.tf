@@ -28,4 +28,29 @@ resource "aws_key_pair" "ec2_key"{
     instance_type = "t2-micro"
     key_name = aws_key_pair.ec2_key.key_name
     availability_zone = "us-east-1a"
+    tags = {
+        name = "ec2-instance"
+    }
+    depends_on = [aws_ebs_volume.extra_ebs_volume]
  }
+
+
+ resource "aws_ebs_volume" "extra_ebs_volume"{
+    availability_zone = "us-east-1a"
+    size = 10          #GB
+    type = "gp2"
+    tags = {
+        name = "extra_ebs_volume"
+    }
+ }
+
+ resource  "aws_volume_attachment" "ebs_ec2_attachment" {
+    device_name = "/dev/home"
+    volume_id = aws_ebs_volume.extra_ebs_volume.id
+    instance_id = aws_instance.ec2.id
+    force_detach = true
+ }
+
+
+
+
